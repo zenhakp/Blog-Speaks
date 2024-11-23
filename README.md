@@ -2,6 +2,7 @@
 A simple blogging platform built with Flask and SQLAlchemy. This application allows users to create, view, and delete blog posts, as well as add comments to posts.
 
 Features
+
 View Blog Posts: Display all posts in descending order of their posting date.
 Create Blog Posts: Add new posts with a title, subtitle, author, and content.
 Comment on Posts: Add comments to individual blog entries.
