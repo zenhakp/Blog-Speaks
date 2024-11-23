@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Speaks</title>
+
+    <link href="{{ url_for('static', filename='blog.min.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body class="body-background">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}"><h3>Home</h3></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('add') }}"><h3>Add</h3></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('delete') }}"><h3>Delete</h3></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Delete Post</h1>
+              <span class="subheading">You can delete existing blogs here.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in posts %}
+          <div class="post-preview">
+            <a href="{{ url_for('post', post_id=post.id) }}">
+              <h2 class="post-title">
+                {{ post.title }}
+              </h2>
+              <h3 class="post-subtitle">
+                {{ post.subtitle }}
+              </h3>
+            </a>
+            <p class="post-meta">Posted by {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
+          </div>
+          <form name="deleteForm" id="deleteForm" method="POST" action="{{ url_for('deletepost') }}">
+            <input type="hidden" name="post_id" value="{{post.id}}">
+            <button class="btn btn-secondary delete-button" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+            </li>
+          </form>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p class="copyright text-muted"style="text-align: center; font-size: 18px; font-weight: bold; color: white;">Copyright &copy;blogspeaks</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+</html>

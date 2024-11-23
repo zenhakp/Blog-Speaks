@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Blog Speaks</title>
+
+  <link href="{{ url_for('static', filename='blog.min.css') }}" rel="stylesheet">
+
+</head>
+
+<body class="body-background">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">
+              <h3>Home</h3>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('add') }}">
+              <h3>Add</h3>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('delete') }}">
+              <h3>Delete</h3>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{ post.title }}</h1>
+            <h2 class="subheading">{{ post.subtitle }}</h2>
+            <span class="meta">Posted by {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto post-content">
+          {{ post.content|safe }}
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+
+  <!-- Comments Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <h3>Comments</h3>
+        <div id="comments">
+          {% for comment in comments %}
+          <div class="comment">
+            <p><strong>{{ comment.author }}</strong>:</p>
+            <p>{{ comment.content }}</p>
+            <p class="timestamp">{{ comment.timestamp.strftime('%B %d, %Y %H:%M') }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- Comment Form -->
+        <form action="{{ url_for('add_comment', post_id=post.id) }}" method="post" class="comment-form">
+          <div class="form-group">
+            <label for="author">Your Name:</label>
+            <input type="text" class="form-control" id="author" name="author" required>
+          </div>
+          <div class="form-group">
+            <label for="content">Comment:</label>
+            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p class="copyright text-muted" style="text-align: center; font-size: 18px; font-weight: bold; color: #fbf7f7;">
+            Copyright &copy;blogspeaks
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Speaks</title>
+
+    <link href="{{ url_for('static', filename='blog.min.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body class="body-background">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}"><h3>Home</h3></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('add') }}"><h3>Add</h3></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('delete') }}"><h3>Delete</h3></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Add New Post</h1>
+              <span class="subheading">Your Story Starts Here.....</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container" style="display: flex;justify-content: center;">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <form name="addForm" id="addForm" method="POST" action="{{ url_for('addpost') }}" novalidate>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="Title" name="title" id="title" required data-validation-required-message="Please enter a title.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Subtitle</label>
+                <input type="text" class="form-control" placeholder="Subtitle" name="subtitle" id="subtitle" required data-validation-required-message="Please enter a subtitle">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls" style="color: rgb(10, 10, 10);">
+                <label>Author</label>
+                <input type="text" class="form-control" placeholder="Author" name="author" id="author" required data-validation-required-message="Please enter your name">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls" style="color: rgb(10, 10, 10);">
+                <label>Blog Content</label>
+                <textarea rows="5" class="form-control" placeholder="Blog content" name="content" id="content" required data-validation-required-message="Please enter the blog content"></textarea>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-secondary" id="sendMessageButton" onclick="alert('Post added successfully!')">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p class="copyright text-muted" style="text-align: center; font-size: 18px; font-weight: bold; color: white;">Copyright &copy;blogspeaks</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+</html>

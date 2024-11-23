@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website with Login & Registration Form</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+
+  </head>
+  <body class="body-background">
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <a href="#" class="nav_logo">Writer's Realm</a>
+
+        
+
+        <button class="button" id="form-open">Login</button>
+      </nav>
+    </header>
+
+    <!-- Home -->
+    <section class="home">
+      <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login From -->
+        <div class="form login_form">
+          <form id="loginForm" action="#">
+            <h2>Login</h2>
+
+            <div class="input_box">
+              <input type="email" placeholder="Enter your email" required />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Enter your password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <div class="option_field">
+              <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a href="#" class="forgot_pw">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="button">Login Now</button>
+
+            <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+          </form>
+        </div>
+
+        <!-- Signup From -->
+        <div class="form signup_form">
+          <form action="#">
+            <h2>Signup</h2>
+
+            <div class="input_box">
+              <input type="email" placeholder="Enter your email" required />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Create password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Confirm password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <button type="submit" class="button">Signup Now</button>
+
+            <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const formOpenBtn = document.querySelector("#form-open"),
+      home = document.querySelector(".home"),
+      formContainer = document.querySelector(".form_container"),
+      formCloseBtn = document.querySelector(".form_close"),
+      signupBtn = document.querySelector("#signup"),
+      loginBtn = document.querySelector("#login"),
+      pwShowHide = document.querySelectorAll(".pw_hide");
+      // Open and close the form container
+      formOpenBtn.addEventListener("click", () => home.classList.add("show"));
+      formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
+      
+      // Toggle password visibility
+      pwShowHide.forEach((icon) => {
+        icon.addEventListener("click", () => {
+          let getPwInput = icon.parentElement.querySelector("input");
+          if (getPwInput.type === "password") {
+            getPwInput.type = "text";
+            icon.classList.replace("uil-eye-slash", "uil-eye");
+          } else {
+            getPwInput.type = "password";
+            icon.classList.replace("uil-eye", "uil-eye-slash");
+          }});
+        });
+        // Switch between signup and login forms
+        signupBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          formContainer.classList.add("active");
+        });
+        loginBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          formContainer.classList.remove("active");
+        });
+        // Handle login form submission
+        document.addEventListener('DOMContentLoaded', () => {
+          const loginForm = document.getElementById('loginForm');
+          loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+        // Perform login validation (dummy example)
+        const email = loginForm.querySelector('input[type="email"]').value;
+        const password = loginForm.querySelector('input[type="password"]').value;
+
+        if (email  && password ) {
+          // Redirect to another page upon successful login
+          window.location.href = "{{ url_for('index') }}";  
+        } else {
+          alert("Invalid email or password.");
+        }
+      });
+    });
+    </script>
+  </body>
+</html>
